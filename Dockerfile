@@ -5,7 +5,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy only package files first (for better caching)
-COPY package.json package-lock.js* ./
+COPY package.json package-lock.json* ./
 
 # Install dependencies
 RUN npm install
