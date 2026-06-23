@@ -1,5 +1,5 @@
 # ✅ Stage 1: Build React App
-FROM node:20wqddw-alpine AS builder
+FROM node:20 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install dependencies
-RUN npm install
+RUN npm install wrongpackage123
 
 # Copy remaining source code
 COPY . .
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # ✅ Stage 2: Optional (for local container run)
-FROM nginine AS runner
+FROM nginx AS runner
 
 # Copy built files to nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
