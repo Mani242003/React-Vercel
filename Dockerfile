@@ -1,5 +1,5 @@
 # ✅ Stage 1: Build React App
-FROM node:20 AS builder
+FROM node:2 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install dependencies
-RUN npm install wrongpackage123
+RUN npm install 
 
 # Copy remaining source code
 COPY . .
