@@ -1,5 +1,5 @@
 # ✅ Stage 1: Build React App
-FROM node:2 AS builder
+FROM node:20 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # ✅ Stage 2: Optional (for local container run)
-FROM nginx AS runner
+FROM nx AS runner
 
 # Copy built files to nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
