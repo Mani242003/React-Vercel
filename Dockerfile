@@ -1,32 +1,25 @@
-# ✅ Stage 1: Build React App
-FROM node:20 AS builder
+# Stage 1: Build
+FROM node:18 AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy only package files first (for better caching)
-COPY package.json package-lock.json* ./
+COPY package*.json ./
+RUN npm install
 
-# Install dependencies
-RUN npm install 
-
-# Copy remaining source code
 COPY . .
 
-# Build the Vite app
+# 🔥 This creates /app/dist
 RUN npm run build
 
-# ✅ Stage 2: Optional (for local container run)
-FROM nginx AS runner
+# Stage 2: Lightweight image
+FROM node:18-slim
 
-# Copy built files to nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Expose port
-EXPOSE 80
+# Only copy build output
+COPY --from=builder /app/dist ./dist
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Debug check (optional)
+RUN ls -la /app
 
-
-
+CMD ["npx", "serve", "dist"]
