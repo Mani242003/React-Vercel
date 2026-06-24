@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # ✅ Stage 2: Optional (for local container run)
-FROM nx AS runner
+FROM nginx AS runner
 
 # Copy built files to nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
