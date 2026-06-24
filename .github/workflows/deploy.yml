@@ -75,8 +75,9 @@ jobs:
 
           npm install -g vercel
 
-          vercel deploy --prod \
-          --token=${{ github.event.inputs.vercel_token }} \
-          --confirm
+      vercel deploy --prod \
+      --name my-app \
+      --token=${{ github.event.inputs.vercel_token }} \
+      --yes
 
           echo "✅ Deployment SUCCESS ✅"
