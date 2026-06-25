@@ -44,24 +44,4 @@ jobs:
           echo "📦 Image: ${{ github.event.inputs.docker_username }}/${{ github.event.inputs.image_name }}"
           echo "🏷 Version: ${{ github.event.inputs.image_tag }}"
 
-      - name: Docker Login
-        run: |
-          echo "🔐 Logging into Docker..."
-          echo "${{ github.event.inputs.docker_password }}" | \
-          docker login -u "${{ github.event.inputs.docker_username }}" --password-stdin
-
-      - name: Build Image
-        run: |
-          set -e
-          echo "🏗 Building Docker image..."
-          docker build -t \
-          ${{ github.event.inputs.docker_username }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.image_tag }} .
-          echo "✅ Build completed"
-
-      - name: Push Image
-        run: |
-          set -e
-          echo "📤 Pushing image..."
-          docker push \
-          ${{ github.event.inputs.docker_username }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.image_tag }}
-          echo "✅ Push successful"
+     
