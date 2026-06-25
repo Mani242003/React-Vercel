@@ -68,16 +68,7 @@ jobs:
           echo "📁 Checking dist..."
           ls -la dist || (echo "❌ dist not found" && exit 1)
 
-      - name: Deploy to Vercel
-        run: |
-          set -e
-          echo "🚀 Deploying to Vercel..."
 
-          npm install -g vercel
 
-        vercel deploy --prod \
-        --name my-app \
-        --token=${{ github.event.inputs.vercel_token }} \
-        --yes
 
           echo "✅ Deployment SUCCESS ✅"
